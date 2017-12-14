@@ -1,0 +1,19 @@
+{
+    "name": "wlf/finane-manager",
+    "authors": [
+        {
+            "name": "wlf",
+            "email": "wendreoofernandes@gmail.com"
+        }
+    ],
+    "require": {
+        "robmorgan/phinx": "0.7.1"
+    },
+        "autoload":
+        {
+            "psr-4":
+            {
+                "WLFin\\":"src/"
+            }
+        }
+}
