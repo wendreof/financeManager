@@ -24,7 +24,7 @@ return
                     ],
                 'seeds' =>
                     [
-                        __DIR__ . 'db/seeds'
+                        __DIR__ . '/db/seeds'
                     ]
             ],
         'environments' =>
