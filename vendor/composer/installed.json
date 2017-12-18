@@ -530,5 +530,189 @@
             "faker",
             "fixtures"
         ]
+    },
+    {
+        "name": "psr/container",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/container.git",
+            "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+            "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-02-14T16:28:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Container\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common Container Interface (PHP FIG PSR-11)",
+        "homepage": "https://github.com/php-fig/container",
+        "keywords": [
+            "PSR-11",
+            "container",
+            "container-interface",
+            "container-interop",
+            "psr"
+        ]
+    },
+    {
+        "name": "pimple/pimple",
+        "version": "v3.2.2",
+        "version_normalized": "3.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/silexphp/Pimple.git",
+            "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/4d45fb62d96418396ec58ba76e6f065bca16e10a",
+            "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "psr/container": "^1.0"
+        },
+        "require-dev": {
+            "symfony/phpunit-bridge": "^3.2"
+        },
+        "time": "2017-07-23T07:32:15+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Pimple": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Pimple, a simple Dependency Injection Container",
+        "homepage": "http://pimple.sensiolabs.org",
+        "keywords": [
+            "container",
+            "dependency injection"
+        ]
+    },
+    {
+        "name": "container-interop/container-interop",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/container-interop/container-interop.git",
+            "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/container-interop/container-interop/zipball/79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+            "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+            "shasum": ""
+        },
+        "require": {
+            "psr/container": "^1.0"
+        },
+        "time": "2017-02-14T19:40:03+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Interop\\Container\\": "src/Interop/Container/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
+        "homepage": "https://github.com/container-interop/container-interop"
+    },
+    {
+        "name": "xtreamwayz/pimple-container-interop",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/xtreamwayz/pimple-container-interop.git",
+            "reference": "de8322e4b61a1f25d6fa21ce29f0368c52d7cec6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/xtreamwayz/pimple-container-interop/zipball/de8322e4b61a1f25d6fa21ce29f0368c52d7cec6",
+            "reference": "de8322e4b61a1f25d6fa21ce29f0368c52d7cec6",
+            "shasum": ""
+        },
+        "require": {
+            "container-interop/container-interop": "^1.0",
+            "pimple/pimple": "^3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.0",
+            "squizlabs/php_codesniffer": "^2.3"
+        },
+        "time": "2015-12-16T17:30:52+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Xtreamwayz\\Pimple\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Geert Eltink",
+                "homepage": "https://xtreamwayz.com/"
+            }
+        ],
+        "description": "This project adds container-interop compatibility to Pimple 3.",
+        "keywords": [
+            "container-interop",
+            "dependency injection",
+            "pimple"
+        ]
     }
 ]

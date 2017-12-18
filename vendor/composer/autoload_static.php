@@ -11,6 +11,10 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
     );
 
     public static $prefixLengthsPsr4 = array (
+        'X' => 
+        array (
+            'Xtreamwayz\\Pimple\\' => 18,
+        ),
         'W' => 
         array (
             'WLFin\\' => 6,
@@ -27,7 +31,12 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
             'Phinx\\' => 6,
+        ),
+        'I' => 
+        array (
+            'Interop\\Container\\' => 18,
         ),
         'F' => 
         array (
@@ -36,6 +45,10 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
     );
 
     public static $prefixDirsPsr4 = array (
+        'Xtreamwayz\\Pimple\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/xtreamwayz/pimple-container-interop/src',
+        ),
         'WLFin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -68,13 +81,31 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
         'Phinx\\' => 
         array (
             0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
         ),
+        'Interop\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'Pimple' => 
+            array (
+                0 => __DIR__ . '/..' . '/pimple/pimple/src',
+            ),
         ),
     );
 
@@ -83,6 +114,7 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInita2b4a9da060343a9628752d2c699e8a3::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInita2b4a9da060343a9628752d2c699e8a3::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita2b4a9da060343a9628752d2c699e8a3::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
