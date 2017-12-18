@@ -5,9 +5,12 @@
  * Date: 18/12/17
  * Time: 21:30
  */
+declare(strict_types=1);
 
 namespace WLFin;
 
+
+use WLFin\Plugins\PluginInterface;
 
 class Application
 {
@@ -27,7 +30,7 @@ class Application
         return $this->serviveContainer->get($name);
     }
 
-    public function addService(string $name, $service)
+    public function addService(string $name, $service): void
     {
         if ( is_callable($service) )
         {
@@ -37,6 +40,11 @@ class Application
         {
             $this->serviveContainer->add($name, $service);
         }
+    }
+
+    public function plugin(PluginInterface $plugin): void
+    {
+        $plugin->register($this->serviveContainer);
     }
 
 }
