@@ -11,6 +11,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use WLFin\Application;
 use WLFin\Plugins\RoutePlugin;
 use WLFin\ServiceContainer;
+use Zend\Diactoros\Response;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -25,10 +26,9 @@ $app->get('/', function(RequestInterface $request) {
 });
 
 $app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
-    echo "Showing home...!";
-    echo "<br/>" . $request->getAttribute('name');
-    echo "<br/>" . $request->getAttribute('id');
-
+    $response = new Response();
+    $response->getBody()->write("Response with diactoros emitter");
+    return $response;
 });
 
 $app->start();
