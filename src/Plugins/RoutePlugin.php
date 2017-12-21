@@ -1,12 +1,5 @@
 <?php
-declare(strict_types =1);
-
-/**
- * Created by PhpStorm.
- * User: wlf
- * Date: 18/12/17
- * Time: 22:03
- */
+declare(strict_types=1);
 
 namespace WLFin\Plugins;
 
@@ -22,26 +15,29 @@ class RoutePlugin implements PluginInterface
 
     public function register(ServiceContainerInterface $container)
     {
-        $routerContainer = new RouterContainer(); #register the application routes
-        $map = $routerContainer->getMap(); #identify the routes in access
+        $routerContainer = new RouterContainer();
+        /* Registrar as rotas da aplicação */
+        $map = $routerContainer->getMap();
+        /* Tem a função de identificar a rota que está sendo acessada */
         $matcher = $routerContainer->getMatcher();
-        $generator = $routerContainer->getGenerator(); #generate links with base in the registereds routes
-
+        /* Tem a funão de gerar links com base nas rotas registradas*/
+        $generator = $routerContainer->getGenerator();
         $request = $this->getRequest();
+
         $container->add('routing', $map);
         $container->add('routing.matcher', $matcher);
         $container->add('routing.generator', $generator);
         $container->add(RequestInterface::class, $request);
 
-        $container->addLazy('route', function (ContainerInterface $container){
+        $container->addLazy('route', function (ContainerInterface $container) {
             $matcher = $container->get('routing.matcher');
             $request = $container->get(RequestInterface::class);
             return $matcher->match($request);
         });
-}
 
+    }
 
-    protected  function getRequest(): RequestInterface
+    protected function getRequest(): RequestInterface
     {
         return ServerRequestFactory::fromGlobals(
             $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
