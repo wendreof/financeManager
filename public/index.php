@@ -10,6 +10,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use WLFin\Application;
 use WLFin\Plugins\RoutePlugin;
+use WLFin\Plugins\ViewPlugin;
 use WLFin\ServiceContainer;
 use Zend\Diactoros\Response;
 
@@ -19,10 +20,11 @@ $serviceContainer = new ServiceContainer();
 $app = new Application($serviceContainer);
 
 $app->plugin(new RoutePlugin());
+$app->plugin(new ViewPlugin());
 
-$app->get('/', function(RequestInterface $request) {
-    var_dump($request->getUri()); die();
-    echo "Hello World...!";
+$app->get('/{name}', function(ServerRequestInterface $request) use ($app) {
+   $view = $app->service('view.renderer');
+   return $view->render('test.html.twig', ['name' => $request->getAttribute('name')]);
 });
 
 $app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
