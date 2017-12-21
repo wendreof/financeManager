@@ -23,6 +23,10 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
         array (
             'WLFin\\' => 6,
         ),
+        'T' => 
+        array (
+            'Twig\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
@@ -65,6 +69,10 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
         'WLFin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -121,6 +129,13 @@ class ComposerStaticInita2b4a9da060343a9628752d2c699e8a3
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'Pimple' => 
