@@ -29,9 +29,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {% for category in categories%}
                                 <tr>
-                                    <td>ID</td>
-                                    <td>Name</td>
+                                    <td>{{ category.id }}</td>
+                                    <td>{{ category.name }}</td>
                                     <td>
                                         <a href="#">
                                             <span class="glyphicon glyphicon-pencil"></span>
@@ -42,6 +43,7 @@
                                         </a>
                                     </td>
                                 </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

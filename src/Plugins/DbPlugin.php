@@ -8,7 +8,6 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class DbPlugin implements PluginInterface
 {
-
     public function register(ServiceContainerInterface $container)
     {
         $capsule = new Capsule();

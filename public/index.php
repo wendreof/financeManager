@@ -32,7 +32,11 @@ $app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
 
 $app->get('/category-costs', function() use($app){
     $view = $app->service('view.renderer');
-    return $view->render('category-costs/list.html.twig');
+    $mymodel = new \WLFin\Models\CategoryCost();
+    $categories = $mymodel->all();
+    return $view->render('category-costs/list.html.twig', [
+        'categories' => $categories
+    ]);
 });
 
 $app->start();
