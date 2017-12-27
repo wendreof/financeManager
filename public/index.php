@@ -9,6 +9,7 @@
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use WLFin\Application;
+use WLFin\Plugins\DbPlugin;
 use WLFin\Plugins\RoutePlugin;
 use WLFin\Plugins\ViewPlugin;
 use WLFin\ServiceContainer;
@@ -21,6 +22,7 @@ $app = new Application($serviceContainer);
 
 $app->plugin(new RoutePlugin());
 $app->plugin(new ViewPlugin());
+$app->plugin(new DbPlugin());
 
 $app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
     $response = new Response();
