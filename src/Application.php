@@ -16,10 +16,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use WLFin\Plugins\PluginInterface;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\ServerRequestFactory;
+use Zend\Diactoros\Response\RedirectResponse;
 
 class Application
 {
-    private $serviveContainer;
+    private $serviceContainer;
 
     /**
      * Application constructor.
@@ -27,29 +28,29 @@ class Application
      */
     public function __construct(ServiceContainerInterface $serviveContainer)
     {
-        $this->serviveContainer = $serviveContainer;
+        $this->serviceContainer = $serviveContainer;
     }
 
     public function service($name)
     {
-        return $this->serviveContainer->get($name);
+        return $this->serviceContainer->get($name);
     }
 
     public function addService(string $name, $service): void
     {
         if ( is_callable($service) )
         {
-            $this->serviveContainer->addLazy($name, $service);
+            $this->serviceContainer->addLazy($name, $service);
         }
         else
         {
-            $this->serviveContainer->add($name, $service);
+            $this->serviceContainer->add($name, $service);
         }
     }
 
     public function plugin(PluginInterface $plugin): void
     {
-        $plugin->register($this->serviveContainer);
+        $plugin->register($this->serviceContainer);
     }
 
     public function get($path, $action, $name = null): Application{
@@ -62,6 +63,18 @@ class Application
             $routing = $this->service('routing');
             $routing->post($name, $path, $action);
             return $this;
+    }
+
+    public function redirect($path)
+    {
+        return new RedirectResponse($path);
+    }
+
+    public function route(string $name, array $params =[])
+    {
+        $generator = $this->service('routing.generator');
+        $path = $generator->generate($name, $params);
+        return $this->redirect($path);
     }
 
     public function start(){
