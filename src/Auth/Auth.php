@@ -6,7 +6,7 @@
  * Time: 23:16
  */
 
-namespace WLF\Auth;
+namespace WLFin\Auth;
 
 
 class Auth implements AuthInterface

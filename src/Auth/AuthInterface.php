@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Time: 23:13
  */
 
-namespace WLF\Auth;
+namespace WLFin\Auth;
 
 
 interface AuthInterface

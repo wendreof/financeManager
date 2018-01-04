@@ -10,7 +10,7 @@ class AuthPlugin implements PluginInterface
 {
     public function register(ServiceContainerInterface $container)
     {
-        $container->addLazy('auth', function (ContainerInterface $container) {
+        $container->addLazy('Auth', function (ContainerInterface $container) {
             return new Auth();
         });
     }
