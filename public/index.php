@@ -8,6 +8,7 @@
 
 use Psr\Http\Message\ServerRequestInterface;
 use WLFin\Application;
+use WLFin\Plugins\AuthPlugin;
 use WLFin\Plugins\DbPlugin;
 use WLFin\Plugins\RoutePlugin;
 use WLFin\Plugins\ViewPlugin;
@@ -22,6 +23,7 @@ $app = new Application($serviceContainer);
 $app->plugin(new RoutePlugin());
 $app->plugin(new ViewPlugin());
 $app->plugin(new DbPlugin());
+$app->plugin(new AuthPlugin());
 
 $app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
     $response = new Response();
@@ -31,5 +33,6 @@ $app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
 
 require_once __DIR__ . '/../src/controllers/category-costs.php';
 require_once __DIR__ . '/../src/controllers/users.php';
+require_once __DIR__ . '/../src/controllers/auth.php';
 
 $app->start();
