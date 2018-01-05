@@ -62,11 +62,11 @@ class DefaultRepository implements RepositoryInterface
     public function find(int $id, bool $failIfNotExist = true)
     {
         return $failIfNotExist?$this->model->findOrFail($id):
-            $this->model->findOrFail($id);
+            $this->_model->findOrFail($id);
     }
 
-    public function findByField(string $field,$value): array
+    public function findByField(string $field,$value)
     {
-        return $this->model->where($field,'=',$value)->toArray();
+        return $this->_model->where($field,'=',$value)->get();
     }
 }
