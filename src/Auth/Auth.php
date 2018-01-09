@@ -9,6 +9,8 @@
 namespace WLFin\Auth;
 
 
+use WLFin\Models\UserInterface;
+
 class Auth implements AuthInterface
 {
     private $jasnyAuth;
@@ -31,12 +33,17 @@ class Auth implements AuthInterface
 
     public function check(): bool
     {
-        return $this->jasnyAuth->user() !== null;
+        return $this->user() !== null;
     }
 
     public function logout(): void
     {
 
+    }
+
+    public function user(): ?UserInterface
+    {
+        return $this->jasnyAuth->user();
     }
 
     public function hashPassword(string $password): string
@@ -51,4 +58,6 @@ class Auth implements AuthInterface
             session_start();
         }
     }
+
+
 }
