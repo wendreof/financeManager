@@ -17,5 +17,9 @@ $app
             return $view->render('Auth/login.html.twig');
         }
         return $app->route('category-costs.list');
-    },'Auth.login');
+    },'Auth.login')
+    ->get('/logout', function(ServerRequestInterface $request) use($app){
+        $app->service('auth')->logout();
+        return $app->route('Auth.show_login_form');
+    }, 'auth.logout');
 
