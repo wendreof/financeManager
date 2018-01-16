@@ -86,31 +86,28 @@ class Application
 
     protected function runBefores(): ?ResponseInterface
     {
-        foreach ($this->befores as $callback){
-            $result = $callback($this->service(ResponseInterface::class));
-            if($result instanceof  ResponseInterface)
-            {
+        foreach ($this->befores as $callback) {
+            $result = $callback($this->service(RequestInterface::class));
+            if($result instanceof ResponseInterface){
                 return $result;
             }
         }
+
         return null;
     }
 
-    public function start(): void
-    {
+    public function start(): void{
         $route = $this->service('route');
         /** @var ServerRequestInterface $request */
         $request = $this->service(RequestInterface::class);
 
-        if( !$route )
-        {
+        if(!$route){
             echo "Page not found";
             exit;
         }
 
-        foreach ( $route->attributes as $key => $value )
-        {
-            $request = $request->withAttribute($key, $value);
+        foreach ($route->attributes as $key => $value){
+            $request = $request->withAttrsibute($key,$value);
         }
 
         $result = $this->runBefores();
@@ -118,6 +115,7 @@ class Application
             $this->emitResponse($result);
             return;
         }
+
         $callable = $route->handler;
         $response = $callable($request);
         $this->emitResponse($response);

@@ -23,3 +23,16 @@ $app
         return $app->route('Auth.show_login_form');
     }, 'auth.logout');
 
+$app->before(function () use($app){
+    $route = $app->service('route');
+    $auth = $app->service('auth');
+    $routesWhiteList = [
+        'Auth.show_login_form',
+        'Auth.login',
+        'category-costs.list'
+    ];
+
+    if(!in_array($route->name,$routesWhiteList) && !$auth->check()){
+        return $app->route('Auth.show_login_form');
+    }
+});
