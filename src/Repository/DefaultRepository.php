@@ -15,58 +15,74 @@ class DefaultRepository implements RepositoryInterface
     /**
      * @var string
      */
-    private $_modelClass;
+    private $modelClass;
     /**
      * @var Model
      */
-    private $_model;
-
+    private $model;
 
     /**
      * DefaultRepository constructor.
      *
      * @param string $modelClass
      */
+
     public function __construct(string $modelClass)
     {
-        $this->_modelClass = $modelClass;
-        $this->_model = new $modelClass;
+        $this->modelClass = $modelClass;
+        $this->model = new $modelClass;
     }
 
     public function all(): array
     {
-        return $this->_model->all()->toArray();
+        return $this->model->all()->toArray();
     }
 
     public function create(array $data)
     {
-        $this->_model->fill($data);
-        $this->_model->save();
-        return $this->_model;
+        $this->model->fill($data);
+        $this->model->save();
+        return $this->model;
     }
 
-    public function update(int $id, array $data)
+    public function update($id, array $data)
     {
-        $model = $this->find($id);
+        $model = $this->findInternal($id);
         $model->fill($data);
         $model->save();
         return $model;
     }
 
-    public function delete(int $id)
+    public function delete($id)
     {
-        $model = $this->find($id);
+        $model = $this->findInternal($id);
         $model->delete();
+    }
+
+    protected function findInternal($id)
+    {
+        return is_array($id) ? $this->findOneBy($id) : $this->find($id);
     }
 
     public function find(int $id, bool $failIfNotExist = true)
     {
         return $failIfNotExist?$this->model->findOrFail($id):
-            $this->_model->findOrFail($id);
+            $this->model->findOrFail($id);
     }
 
     public function findByField(string $field,$value)
     {
-        return $this->_model->where($field,'=',$value)->get();
+        return $this->model->where($field,'=',$value)->get();
     }
+
+    public function findOneBy(array $search)
+    {
+        $queryBuilder = $this->model;
+        foreach ($search as $field => $value){
+            $queryBuilder = $queryBuilder->where($field, '=', $value);
+        }
+
+        return $queryBuilder->firstOrFail();
+    }
+
 }
