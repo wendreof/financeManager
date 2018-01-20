@@ -1,1 +1,1 @@
-# finace_manager
+# finance_manager
