@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WLFin\Plugins;
 
 use Psr\Container\ContainerInterface;
+use WLFin\Models\BillPay;
 use WLFin\Models\BillReceive;
 use WLFin\Models\CategoryCost;
 use WLFin\Models\User;
@@ -29,6 +30,10 @@ class DbPlugin implements PluginInterface
         $container->addLazy('bill-receive.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(BillReceive::class);
         });
+
+        $container->addLazy('bill-pay.repository', function (ContainerInterface $container) {
+                    return $container->get('repository.factory')->factory(BillPay::class);
+                });
 
         $container->addLazy('user.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(User::class);
