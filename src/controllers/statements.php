@@ -16,8 +16,5 @@ $app
             : \DateTime::createFromFormat('d/m/Y', $dateEnd)->format('Y-m-d');
 
 
-        print_r($dateStart);
-        print_r($dateEnd);
-        die();
         return $view->render('statements.html.twig');
     },'statements.list');
