@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace WLFin\Repository;
 
 
+use Illuminate\Support\Collection;
 use WLFin\Models\BillPay;
 use WLFin\Models\BillReceive;
 
@@ -30,5 +31,13 @@ class StatementRepository implements StatementRepositoryInterface
             ->whereBetween('date_launch', [$dateStart, $dateEnd])
             ->where('bill_receives.user_id', $userId)
             ->get();
+
+        $collection = new Collection( array_merge_recursive($billPays->toArray(),$billReceives->toArray()));
+        $statements = $collection->sortByDesc('date_launch');
+        return [
+            'statement' => $statements,
+            'total_pays' => $billPays->sum('value'),
+            'total_receives' => $billReceives->sum('value'),
+        ];
     }
 }

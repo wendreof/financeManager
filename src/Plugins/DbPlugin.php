@@ -9,6 +9,7 @@ use WLFin\Models\BillReceive;
 use WLFin\Models\CategoryCost;
 use WLFin\Models\User;
 use WLFin\Repository\RepositoryFactory;
+use WLFin\Repository\StatementRepository;
 use WLFin\ServiceContainerInterface;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -37,6 +38,10 @@ class DbPlugin implements PluginInterface
 
         $container->addLazy('user.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(User::class);
+        });
+
+        $container->addLazy('statement.repository', function () {
+            return new StatementRepository();
         });
     }
 }
