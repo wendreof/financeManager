@@ -8,6 +8,7 @@ use WLFin\Models\BillPay;
 use WLFin\Models\BillReceive;
 use WLFin\Models\CategoryCost;
 use WLFin\Models\User;
+use WLFin\Repository\CategoryCostRepository;
 use WLFin\Repository\RepositoryFactory;
 use WLFin\Repository\StatementRepository;
 use WLFin\ServiceContainerInterface;
@@ -24,8 +25,8 @@ class DbPlugin implements PluginInterface
 
         $container->add('repository.factory', new RepositoryFactory());
 
-        $container->addLazy('category-cost.repository', function (ContainerInterface $container) {
-            return $container->get('repository.factory')->factory(CategoryCost::class);
+        $container->addLazy('category-cost.repository', function () {
+            return new CategoryCostRepository();
         });
 
         $container->addLazy('bill-receive.repository', function (ContainerInterface $container) {
@@ -42,6 +43,7 @@ class DbPlugin implements PluginInterface
 
         $container->addLazy('statement.repository', function () {
             return new StatementRepository();
-        });
+        }
+        );
     }
 }

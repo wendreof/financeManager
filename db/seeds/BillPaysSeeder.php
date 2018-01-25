@@ -22,29 +22,26 @@ class BillPaysSeeder extends AbstractSeed
     public function run()
     {
         require __DIR__ . '/../bootstrap.php';
-
-        $this->categories = CategoryCost::all();
-
+        $this->categories = \WLFin\Models\CategoryCost::all();
         $faker = \Faker\Factory::create('pt_BR');
         $faker->addProvider($this);
         $billPays = $this->table('bill_pays');
         $data = [];
-        foreach (range(1,20) as $value)
-        {
+        foreach (range(1, 20) as $value) {
             $userId = rand(1,4);
             $data[] = [
-                    'date_launch' => $faker->date(),
-                    'name' => $faker->word,
-                    'user_id' => $userId,
-                    'category_cost_id' => $faker->categoryId($userId),
-                    'value' => $faker->randomFloat(2, 10, 1000),
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
+                'date_launch' => $faker->dateTimeBetween('-1 month')->format('Y-m-d'),
+                'name' => $faker->word,
+                'value' => $faker->randomFloat(2, 10, 1000),
+                'user_id' => $userId,
+                'category_cost_id' => $faker->categoryId($userId),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
             ];
         }
         $billPays->insert($data)->save();
-
     }
+
 
     public function categoryId($userId)
     {
