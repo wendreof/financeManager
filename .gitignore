@@ -1,2 +1,5 @@
+.idea
+php_erros.log
 vendor/
+.env
 
