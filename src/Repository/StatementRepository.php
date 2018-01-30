@@ -32,7 +32,7 @@ class StatementRepository implements StatementRepositoryInterface
             ->where('bill_receives.user_id', $userId)
             ->get();
 
-        $collection = new Collection( array_merge_recursive($billPays->toArray(),$billReceives->toArray()));
+        $collection = new Collection(array_merge_recursive($billPays->toArray(), $billReceives->toArray()));
         $statements = $collection->sortByDesc('date_launch');
         return [
             'statement' => $statements,

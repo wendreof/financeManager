@@ -25,6 +25,7 @@ class Application
 
     /**
      * Application constructor.
+     *
      * @param $seriveContainer
      */
     public function __construct(ServiceContainerInterface $serviveContainer)
@@ -39,8 +40,7 @@ class Application
 
     public function addService(string $name, $service): void
     {
-        if ( is_callable($service) )
-        {
+        if (is_callable($service) ) {
             $this->serviceContainer->addLazy($name, $service);
         }
         else
@@ -54,13 +54,15 @@ class Application
         $plugin->register($this->serviceContainer);
     }
 
-    public function get($path, $action, $name = null): Application{
+    public function get($path, $action, $name = null): Application
+    {
         $routing = $this->service('routing');
         $routing->get($name, $path, $action);
         return $this;
     }
 
-    public function post($path, $action, $name = null): Application{
+    public function post($path, $action, $name = null): Application
+    {
             $routing = $this->service('routing');
             $routing->post($name, $path, $action);
             return $this;
@@ -88,7 +90,7 @@ class Application
     {
         foreach ($this->befores as $callback) {
             $result = $callback($this->service(RequestInterface::class));
-            if($result instanceof ResponseInterface){
+            if($result instanceof ResponseInterface) {
                 return $result;
             }
         }
@@ -96,22 +98,25 @@ class Application
         return null;
     }
 
-    public function start(): void{
+    public function start(): void
+    {
         $route = $this->service('route');
-        /** @var ServerRequestInterface $request */
+        /**
+ * @var ServerRequestInterface $request 
+*/
         $request = $this->service(RequestInterface::class);
 
-        if(!$route){
+        if(!$route) {
             echo "Page not found";
             exit;
         }
 
         foreach ($route->attributes as $key => $value){
-            $request = $request->withAttribute($key,$value);
+            $request = $request->withAttribute($key, $value);
         }
 
         $result = $this->runBefores();
-        if($result){
+        if($result) {
             $this->emitResponse($result);
             return;
         }
