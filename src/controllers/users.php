@@ -23,12 +23,13 @@ $app
     )
     ->post(
         '/users/store', function (ServerRequestInterface $request) use ($app) {
-            // creating user
-            $data = $request->getParsedBody();
-            $repository = $app->service('user.repository');
-            $repository->create($data);
-            return $app->route('users.list');
-        }, 'users.store'
+        $data = $request->getParsedBody();
+        $repository = $app->service('user.repository');
+        $auth = $app->service('auth');
+        $data['password'] = $auth->hashPassword($data['password']);
+        $repository->create($data);
+        return $app->redirect('/users');
+    }, 'users.store'
     )
     ->get(
         '/users/{id}/edit', function (ServerRequestInterface $request) use ($app) {
@@ -45,12 +46,15 @@ $app
     )
     ->post(
         '/users/{id}/update', function (ServerRequestInterface $request) use ($app) {
-            $repository = $app->service('user.repository');
-            $id = $request->getAttribute('id');
-            $data = $request->getParsedBody();
-            $repository->update($id, $data);
-            return $app->route('users.list');
-        }, 'users.update'
+        $repository = $app->service('user.repository');
+        $id = $request->getAttribute('id');
+        $data = $request->getParsedBody();
+        if(isset($data['password'])){
+            unset($data['password']);
+        }
+        $repository->update($id, $data);
+        return $app->route('users.list');
+    }, 'users.update'
     )
     ->get(
         '/users/{id}/show', function (ServerRequestInterface $request) use ($app) {
